@@ -15,6 +15,8 @@ e.g. the CSP, CSP Report-Only, Report-To, and Referrer-Policy headers.
 
 Mostly config compatible with [csp-html-webpack-plugin](https://github.com/slackhq/csp-html-webpack-plugin)
 
+## WARNING, STILL EARLY AND THINGS LIKE MODULE RESOLUTION ARE FINICKY
+
 ## Installation
 
 Install the plugin with npm:
@@ -24,6 +26,13 @@ $ npm install --save-dev vite-plugin-csp
 # Or shorthand
 npm i -D vite-plugin-csp
 ```
+
+## Known issues
+
+  - Relative modules are resolved relative to the CWD, not the file
+  - no SSR support (and thus no nonce support)
+  - No parsing of JS embeded sources (since that would require framework specific plugins)
+  - Only `script` and `style` related directives are supported (except for the inclusion of `report-to` for generating headers)
 
 ## Under construction :)
 
