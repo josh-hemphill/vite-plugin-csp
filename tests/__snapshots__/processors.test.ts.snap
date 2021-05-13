@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors CaddyJSON(processorOptions) creates default config: CaddyJSON 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors CaddyJSON(processorOptions) creates custom config: CaddyJSON 1`] = `
+"{
+  \\"listen\\": [
+    \\":443\\"
+  ],
+  \\"routes\\": [
+    {
+      \\"match\\": [
+        {
+          \\"host\\": [
+            \\"localhost\\"
+          ]
+        }
+      ],
+      \\"handle\\": [
+        {
+          \\"handler\\": \\"file_server\\",
+          \\"root\\": \\"/var/www\\"
+        },
+        {
+          \\"handler\\": \\"headers\\",
+          \\"response\\": {
+            \\"set\\": {
+              \\"Content-Security-Policy-Report-Only\\": [
+                \\"\\"
+              ],
+              \\"Content-Security-Policy\\": [
+                \\"\\"
+              ],
+              \\"Report-To\\": [
+                \\"\\"
+              ],
+              \\"Referrer-Policy\\": [
+                \\"\\"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors CaddyJSON_HeadersOnly(processorOptions) creates default config: CaddyJSON_HeadersOnly 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors CaddyJSON_HeadersOnly(processorOptions) creates custom config: CaddyJSON_HeadersOnly 1`] = `
+"{
+  \\"handler\\": \\"headers\\",
+  \\"response\\": {
+    \\"set\\": {
+      \\"Content-Security-Policy-Report-Only\\": [
+        \\"\\"
+      ],
+      \\"Content-Security-Policy\\": [
+        \\"\\"
+      ],
+      \\"Report-To\\": [
+        \\"\\"
+      ],
+      \\"Referrer-Policy\\": [
+        \\"\\"
+      ]
+    }
+  }
+}"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Caddyfile(processorOptions) creates default config: Caddyfile 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Caddyfile(processorOptions) creates custom config: Caddyfile 1`] = `
+"
+		{$SITE_ADDRESS}
+
+		root * dist
+		header Content-Security-Policy-Report-Only \\"\\"
+		header Content-Security-Policy \\"\\"
+		header Report-To \\"\\"
+		header Referrer-Policy \\"\\"
+
+		file_server
+		"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Caddyfile_HeadersOnly(processorOptions) creates default config: Caddyfile_HeadersOnly 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Caddyfile_HeadersOnly(processorOptions) creates custom config: Caddyfile_HeadersOnly 1`] = `
+"header Content-Security-Policy-Report-Only \\"\\"
+header Content-Security-Policy \\"\\"
+header Report-To \\"\\"
+header Referrer-Policy \\"\\"
+"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Nginx(processorOptions) creates default config: Nginx 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Nginx(processorOptions) creates custom config: Nginx 1`] = `
+"
+		server {
+			listen	443 80;
+			index	index.html Index.html;
+			add_header Content-Security-Policy-Report-Only \\"\\";
+			add_header Content-Security-Policy \\"\\";
+			add_header Report-To \\"\\";
+			add_header Referrer-Policy \\"\\";
+
+			location / {
+				try_files	$uri /index.html $uri/ / =404;
+			}
+		}
+		"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Nginx_HeadersOnly(processorOptions) creates default config: Nginx_HeadersOnly 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors Nginx_HeadersOnly(processorOptions) creates custom config: Nginx_HeadersOnly 1`] = `
+"add_header Content-Security-Policy-Report-Only \\"\\";
+add_header Content-Security-Policy \\"\\";
+add_header Report-To \\"\\";
+add_header Referrer-Policy \\"\\";
+"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates custom config for CaddyJSON: CaddyJSON 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates default config for CaddyJSON: CaddyJSON 1`] = `
+"{
+  \\"listen\\": [
+    \\":443\\"
+  ],
+  \\"routes\\": [
+    {
+      \\"match\\": [
+        {
+          \\"host\\": [
+            \\"localhost\\"
+          ]
+        }
+      ],
+      \\"handle\\": [
+        {
+          \\"handler\\": \\"file_server\\",
+          \\"root\\": \\"/var/www\\"
+        },
+        {
+          \\"handler\\": \\"headers\\",
+          \\"response\\": {
+            \\"set\\": {
+              \\"Content-Security-Policy-Report-Only\\": [
+                \\"\\"
+              ],
+              \\"Content-Security-Policy\\": [
+                \\"object-src 'none'; script-src 'unsafe-inline' 'self' 'unsafe-eval'; script-src-attr; style-src 'unsafe-inline' 'self' 'unsafe-eval'; style-src-attr; base-uri 'self';\\"
+              ],
+              \\"Report-To\\": [
+                \\"\\"
+              ],
+              \\"Referrer-Policy\\": [
+                \\"strict-origin-when-cross-origin\\"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates custom config for CaddyJSON_HeadersOnly: CaddyJSON_HeadersOnly 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates default config for CaddyJSON_HeadersOnly: CaddyJSON_HeadersOnly 1`] = `
+"{
+  \\"handler\\": \\"headers\\",
+  \\"response\\": {
+    \\"set\\": {
+      \\"Content-Security-Policy-Report-Only\\": [
+        \\"\\"
+      ],
+      \\"Content-Security-Policy\\": [
+        \\"object-src 'none'; script-src 'unsafe-inline' 'self' 'unsafe-eval'; script-src-attr; style-src 'unsafe-inline' 'self' 'unsafe-eval'; style-src-attr; base-uri 'self';\\"
+      ],
+      \\"Report-To\\": [
+        \\"\\"
+      ],
+      \\"Referrer-Policy\\": [
+        \\"strict-origin-when-cross-origin\\"
+      ]
+    }
+  }
+}"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates custom config for Caddyfile: Caddyfile 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates default config for Caddyfile: Caddyfile 1`] = `
+"
+		{$SITE_ADDRESS}
+
+		root * dist
+		header Content-Security-Policy-Report-Only \\"\\"
+		header Content-Security-Policy \\"object-src 'none'; script-src 'unsafe-inline' 'self' 'unsafe-eval'; script-src-attr; style-src 'unsafe-inline' 'self' 'unsafe-eval'; style-src-attr; base-uri 'self';\\"
+		header Report-To \\"\\"
+		header Referrer-Policy \\"strict-origin-when-cross-origin\\"
+
+		file_server
+		"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates custom config for Caddyfile_HeadersOnly: Caddyfile_HeadersOnly 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates default config for Caddyfile_HeadersOnly: Caddyfile_HeadersOnly 1`] = `
+"header Content-Security-Policy-Report-Only \\"\\"
+header Content-Security-Policy \\"object-src 'none'; script-src 'unsafe-inline' 'self' 'unsafe-eval'; script-src-attr; style-src 'unsafe-inline' 'self' 'unsafe-eval'; style-src-attr; base-uri 'self';\\"
+header Report-To \\"\\"
+header Referrer-Policy \\"strict-origin-when-cross-origin\\"
+"
+`;
+
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates custom config for Nginx: Nginx 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates default config for Nginx: Nginx 1`] = `
+"
+		server {
+			listen	443 80;
+			index	index.html Index.html;
+			add_header Content-Security-Policy-Report-Only \\"\\";
+			add_header Content-Security-Policy \\"object-src 'none'; script-src 'unsafe-inline' 'self' 'unsafe-eval'; script-src-attr; style-src 'unsafe-inline' 'self' 'unsafe-eval'; style-src-attr; base-uri 'self';\\";
+			add_header Report-To \\"\\";
+			add_header Referrer-Policy \\"strict-origin-when-cross-origin\\";
+
+			location / {
+				try_files	$uri /index.html $uri/ / =404;
+			}
+		}
+		"
+`;
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates custom config for Nginx_HeadersOnly: Nginx_HeadersOnly 1`] =
+exports[`ViteCspPlugin({ processFn:[] }) builtin processors plugin.transformIndexHtml() => buildConfigs() creates default config for Nginx_HeadersOnly: Nginx_HeadersOnly 1`] = `
+"add_header Content-Security-Policy-Report-Only \\"\\";
+add_header Content-Security-Policy \\"object-src 'none'; script-src 'unsafe-inline' 'self' 'unsafe-eval'; script-src-attr; style-src 'unsafe-inline' 'self' 'unsafe-eval'; style-src-attr; base-uri 'self';\\";
+add_header Report-To \\"\\";
+add_header Referrer-Policy \\"strict-origin-when-cross-origin\\";
+"
+`;
