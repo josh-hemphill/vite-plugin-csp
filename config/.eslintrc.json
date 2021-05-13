@@ -84,6 +84,9 @@
 		"sourceType": "module",
 		"parser": "@typescript-eslint/parser"
 	},
+	"ignorePatterns": [
+		"**/csp-typed-directives.d.ts"
+	],
 	"overrides": [
 		{
 			"files": [

@@ -217,8 +217,6 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 			assignHash('style-src-attr');
 
 			cssImportUrls.forEach((v) => {
-				console.dir(v);
-				console.dir(idMap);
 				if (idMap.has(v)) {
 					const res = idMap.get(v);
 					if (res) {
