@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { PluginOption } from 'vite';
 import { DebugAble, PolicyOptions } from '../src/consts.js';
 import { ViteCspPlugin } from '../src/index.js';
@@ -14,13 +15,19 @@ const checkReportToValidation = (isSeparatePolicy: boolean, isNested = false) =>
 		let createInvalidPlugin: jest.Mock<PluginOption>;
 		let createValidPlugin: jest.Mock<PluginOption>;
 		if (isSeparatePolicy) {
+			//@ts-ignore
 			createInvalidPlugin = jest.fn(() => ViteCspPlugin(policy,invalidContent));
+			//@ts-ignore
 			createValidPlugin = jest.fn(() => ViteCspPlugin(policy,validContent));
 		} else if(isNested) {
+			//@ts-ignore
 			createInvalidPlugin = jest.fn(() => ViteCspPlugin({...invalidContent, mapHtmlFiles:{'someFile':policy}}));
+			//@ts-ignore
 			createValidPlugin = jest.fn(() => ViteCspPlugin({...validContent, mapHtmlFiles:{'someFile':policy}}));
 		} else {
+			//@ts-ignore
 			createInvalidPlugin = jest.fn(() => ViteCspPlugin({...invalidContent, policy}));
+			//@ts-ignore
 			createValidPlugin = jest.fn(() => ViteCspPlugin({...validContent, policy}));
 		}
 		try {

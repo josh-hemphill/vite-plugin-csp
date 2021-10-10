@@ -202,6 +202,8 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 				const x = localPolicy.CSP[directive];
 				if (!Array.isArray(x)) {
 					if (typeof x !== 'undefined') {
+						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+						//@ts-ignore
 						localPolicy.CSP[directive] = [x];
 					} else {
 						localPolicy.CSP[directive] = [];

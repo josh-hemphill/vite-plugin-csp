@@ -13,6 +13,10 @@ const testFilesContent = ['index.html', 'main.js', 'main2.js', 'test.css'].map(
 	}),
 );
 
+afterAll(() => {
+	mockFs.restore();
+});
+
 describe('plugin.transformIndexHtml()', () => {
 	describe('HTML content', () => {
 		it('creates valid hashes', async () => {

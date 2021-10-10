@@ -1,5 +1,6 @@
 
 import * as cheerio from 'cheerio';
+import type {Element} from 'cheerio';
 import { BinaryLike, createHash } from 'crypto';
 import path from 'path';
 import { HashCache, ValidHashes,HashEnabled,HashResults,CryptoSources, validCrypto } from './consts.js';
@@ -98,9 +99,9 @@ export function getAllSourceHashes (
 	// Hash inline scripts in `onSomething=""` tags if enabled
 	if (hashEnabled['script-src-attr']) {
 		const onFn = (v: string) => v.startsWith('on');
-		$('*').filter((i,el)=> Object.keys(el.attribs).some(onFn)).each((i,el) => {
-			Object.keys(el.attribs).filter(onFn).forEach((v) => {
-				const content = el.attribs[v];
+		$('*').filter((i,el)=> Object.keys((<Element><unknown>el).attribs).some(onFn)).each((i,el) => {
+			Object.keys((<Element><unknown>el).attribs).filter(onFn).forEach((v) => {
+				const content = (<Element><unknown>el).attribs[v];
 				if (content?.length) {
 					tryAddHash(hash(hashingMethod,content),'scriptAttrHashes');
 				}
