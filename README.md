@@ -17,6 +17,8 @@ Mostly config compatible with [csp-html-webpack-plugin](https://github.com/slack
 
 ## WARNING, STILL EARLY AND THINGS LIKE MODULE RESOLUTION ARE FINICKY
 
+### Now looking at making a multi-repo because this is going to require multiple layers of shared functionality and also built to an unplugin
+
 ## Installation
 
 Install the plugin with npm:
