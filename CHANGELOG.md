@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/josh-hemphill/vite-plugin-csp/compare/v1.0.0...v1.0.1) (2021-10-11)
+
+
+### Bug Fixes
+
+* :bug: update status and previous was bug requiring release ([5d8b834](https://github.com/josh-hemphill/vite-plugin-csp/commit/5d8b83449fedc99a85afb066566781d688544c9f))
+
 # 1.0.0 (2021-05-13)
 
 
