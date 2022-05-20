@@ -1,6 +1,6 @@
 {
 	"name": "vite-plugin-csp",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Create CSP meta tags and header configs from all sources in the final Vite html",
 	"type": "module",
 	"scripts": {

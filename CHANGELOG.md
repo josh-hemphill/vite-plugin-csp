@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/josh-hemphill/vite-plugin-csp/compare/v1.0.1...v1.1.0) (2022-05-20)
+
+
+### Features
+
+* :arrow_up: upgrade deps, and add QoL options ([85e3aff](https://github.com/josh-hemphill/vite-plugin-csp/commit/85e3affede2be47bb44e2e5e40ba6169f1a3bb5a)), closes [#5](https://github.com/josh-hemphill/vite-plugin-csp/issues/5) [#4](https://github.com/josh-hemphill/vite-plugin-csp/issues/4)
+
 ## [1.0.1](https://github.com/josh-hemphill/vite-plugin-csp/compare/v1.0.0...v1.0.1) (2021-10-11)
 
 
