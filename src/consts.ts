@@ -1,4 +1,4 @@
-import { CspDirectiveHeaders, CspDirectives, DirectivesObj, ValidHashes as validHashes,ValidCrypto as lValidCrypto } from 'csp-typed-directives';
+import { CspDirectiveHeaders, CspDirectives, DirectivesObj, ValidHashes as validHashes, ValidCrypto as lValidCrypto } from 'csp-typed-directives';
 import { ResolvedConfig } from 'vite';
 import { builtinProcessorFns } from './builtin-processors/index.js';
 
@@ -6,11 +6,12 @@ type ValidCrypto = typeof lValidCrypto[number]
 export const validCrypto = lValidCrypto;
 export type HashEnabled = typeof DEFAULT_OPTIONS['hashEnabled']
 export type CryptoSources = `${ValidCrypto}-${string}`
-export type HashResults = Record<keyof HashEnabled,Set<CryptoSources>>
+export type HashResults = Record<keyof HashEnabled, Set<CryptoSources>>
 
 export const DEFAULT_OPTIONS = {
 	enabled: <boolean>true,
 	inject: <boolean>true,
+	injectReporting: <boolean>false,
 	onDev: <DevRunTypes>'permissive',
 	policy: <PolicyOptions>{
 		'base-uri': 'self',
@@ -34,7 +35,7 @@ export const DEFAULT_OPTIONS = {
 	referrerHeaderOverride: <DirectivesParams['3']>undefined,
 	sendReportsTo: <DirectivesParams['1']>undefined,
 	reportSubset: <DirectivesParams['2']>undefined,
-	mapHtmlFiles: <Record<string,PolicyOptions> | undefined>undefined,
+	mapHtmlFiles: <Record<string, PolicyOptions> | undefined>undefined,
 	debugPlugin: <boolean>false,
 	srvConfDir: <string>'.server_config',
 };
@@ -45,7 +46,7 @@ export type InternalProcessFnParams = {
 	processor: InternalProcessFnNames,
 	outFile?: string,
 }
-export type InternalProcessOptions = InternalProcessFnParams & {ctx: ProcessFnContext, parsedHeaders: CspDirectiveHeaders}
+export type InternalProcessOptions = InternalProcessFnParams & { ctx: ProcessFnContext, parsedHeaders: CspDirectiveHeaders }
 export type InternalProcessFn = (options: InternalProcessOptions) => void
 
 export const HASHES = validHashes;
@@ -60,7 +61,7 @@ export type ProcessFnContext = {
 	srvConfDir: string,
 	builtinProcessorFns: typeof builtinProcessorFns
 }
-type ProcessFnReturn = {name:string,content:string} | void
+type ProcessFnReturn = { name: string, content: string } | void
 export type ProcessFn = (ctx: ProcessFnContext, parsedHeaders: CspDirectiveHeaders) => ProcessFnReturn | Promise<ProcessFnReturn>;
 
 export type DirectivesParams = ConstructorParameters<typeof CspDirectives>
@@ -72,7 +73,7 @@ export type ProcessOption = keyof typeof builtinProcessorFns
 
 export type ProcessOptions = ProcessOption | ProcessOption[]
 
-export type HashCache = Record<ValidHashes,CryptoSources> & {fileType: 'script' | 'style'}
+export type HashCache = Record<ValidHashes, CryptoSources> & { fileType: 'script' | 'style' }
 
 export type DebugProperties = {
 	inject: boolean;
@@ -91,7 +92,7 @@ export type DebugProperties = {
 	};
 	processFns: ProcessFn[];
 	idMap: Map<string, HashCache>;
-	validatedMappedPolicies: Record<string,CspDirectives>;
+	validatedMappedPolicies: Record<string, CspDirectives>;
 	config: Partial<CherryPickedConfig>;
 };
 

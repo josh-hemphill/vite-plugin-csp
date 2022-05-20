@@ -46,7 +46,7 @@ describe('plugin.transformIndexHtml()', () => {
 						(v) =>
 							v.tag === 'meta' &&
 							v.attrs?.['http-equiv'] ===
-								'Content-Security-Policy',
+							'Content-Security-Policy',
 					)?.attrs?.content;
 				}
 			}
@@ -108,7 +108,7 @@ describe('plugin.transformIndexHtml()', () => {
 						(v) =>
 							v.tag === 'meta' &&
 							v.attrs?.['http-equiv'] ===
-								'Content-Security-Policy',
+							'Content-Security-Policy',
 					)?.attrs?.content;
 				}
 			}
@@ -121,8 +121,8 @@ describe('plugin.transformIndexHtml()', () => {
 				script-src-attr
 					'sha384-c23foA8LVWSqmGoVRqUsf5lASwN8unYNRr8qJuhkkWwU4ICLN6WArwfv+Tb+yBxn';
 				style-src 'unsafe-eval'
-					'sha384-BH0wmMpEYjSsKmYmASJBskfwtrixFSLCphySyJuHIOKhjmVEbLp1d1yr+ewWtfRe'
-					'sha384-ZFchH0Vh8mzL2jg8jCotTe4UwKAp0sBGoL0RwuHloOKErVM2Dr39imcjvKPRrosI';
+					'sha384-ZFchH0Vh8mzL2jg8jCotTe4UwKAp0sBGoL0RwuHloOKErVM2Dr39imcjvKPRrosI'
+					'sha384-BH0wmMpEYjSsKmYmASJBskfwtrixFSLCphySyJuHIOKhjmVEbLp1d1yr+ewWtfRe';
 				style-src-attr
 					'sha384-j6AqPm53uxM91atZu2wlBuabpEwZ8fol7/Ptz36bIE+fYe+BCuSjCkB7s4IlDHan'
 					'sha384-7N5SR/us2Uqts3pJWURD5adJUTl1dniUhj1khCPI8tdKkVQQhPHSB8vpNVJ9NBgH'
@@ -161,7 +161,7 @@ describe('plugin.transformIndexHtml()', () => {
 							(v) =>
 								v.tag === 'meta' &&
 								v.attrs?.['http-equiv'] ===
-									'Content-Security-Policy',
+								'Content-Security-Policy',
 						)?.attrs?.content)
 				) || '';
 			const headerResults = {

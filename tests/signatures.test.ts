@@ -9,13 +9,14 @@ describe('ViteCspPlugin()', () => {
 		const plugin = ViteCspPlugin();
 		expect(plugin).toMatchInlineSnapshot(
 			{
+				apply: expect.any(Function),
 				configResolved: expect.any(Function),
 				transform: expect.any(Function),
 				transformIndexHtml: expect.any(Function),
 			},
 			`
 		Object {
-		  "apply": "build",
+		  "apply": Any<Function>,
 		  "configResolved": Any<Function>,
 		  "enforce": "post",
 		  "name": "vite-plugin-csp",
@@ -38,7 +39,7 @@ describe('ViteCspPlugin()', () => {
 		) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			//@ts-ignore
-			plugin.configResolved({command:commandValue});
+			plugin.configResolved({ command: commandValue });
 		}
 		const { config } = (<DebugAble>plugin).debugProperties;
 		expect(config.command).toBe(commandValue);

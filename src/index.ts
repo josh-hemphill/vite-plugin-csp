@@ -1,7 +1,7 @@
 import type { HtmlTagDescriptor, PluginOption } from 'vite';
 import path from 'path';
 import { CspDirectiveHeaders, CspDirectives, ValidSource } from 'csp-typed-directives';
-import {builtinProcessorFns} from './builtin-processors/index.js';
+import { builtinProcessorFns } from './builtin-processors/index.js';
 import { createFilter } from '@rollup/pluginutils';
 import { getAllSourceHashes, hash } from './get-all-sources.js';
 import {
@@ -18,9 +18,9 @@ import { internalProcFileWrite } from './processors-helpers.js';
 import { getCssImportUrls } from './extractCssImports.js';
 
 class HtmlTag implements HtmlTagDescriptor {
-	tag: string
-	attrs: Record<string,string|boolean>;
-	constructor (tag: string, attrs: Record<string,string|boolean>) {
+	tag: string;
+	attrs: Record<string, string | boolean>;
+	constructor(tag: string, attrs: Record<string, string | boolean>) {
 		this.tag = tag;
 		this.attrs = attrs;
 	}
@@ -30,11 +30,11 @@ export type ViteCspPluginOptions = typeof DEFAULT_OPTIONS;
 
 type ViteCspPluginOpts = Partial<ViteCspPluginOptions>
 
-function createViteCspPlugin (policy: PolicyOptions, options: ViteCspPluginOpts): PluginOption;
-function createViteCspPlugin (options: Partial<ViteCspPluginOpts>): PluginOption;
-function createViteCspPlugin (): PluginOption;
-function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [ViteCspPluginOpts] | [])): PluginOption {
-	const {p,o} = {
+function createViteCspPlugin(policy: PolicyOptions, options: ViteCspPluginOpts): Exclude<PluginOption, PluginOption[]>;
+function createViteCspPlugin(options: Partial<ViteCspPluginOpts>): Exclude<PluginOption, PluginOption[]>;
+function createViteCspPlugin(): Exclude<PluginOption, PluginOption[]>;
+function createViteCspPlugin(...opts: ([PolicyOptions, ViteCspPluginOpts] | [ViteCspPluginOpts] | [])): Exclude<PluginOption, PluginOption[]> {
+	const { p, o } = {
 		0: {
 			o: DEFAULT_OPTIONS,
 			p: DEFAULT_OPTIONS.policy,
@@ -53,9 +53,12 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 		return undefined;
 	}
 	const inject = typeof o.inject === 'boolean' ? o.inject : DEFAULT_OPTIONS.inject;
+	const injectReporting = typeof o.injectReporting === 'boolean'
+		? o.injectReporting
+		: DEFAULT_OPTIONS.injectReporting;
 	const onDev = typeof o.onDev === 'string' ? o.onDev : DEFAULT_OPTIONS.onDev;
 
-	function processPolicyOptions ( pOp:PolicyOptions ): CspDirectives {
+	function processPolicyOptions(pOp: PolicyOptions): CspDirectives {
 		const pPolicy = Array.isArray(pOp)
 			? new CspDirectives(...pOp)
 			: new CspDirectives(pOp);
@@ -74,7 +77,7 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 	}
 
 	const policy = processPolicyOptions(p);
-	const validatedMappedPolicies: Record<string,CspDirectives> = {};
+	const validatedMappedPolicies: Record<string, CspDirectives> = {};
 	if (!!o.mapHtmlFiles && Object.keys(o.mapHtmlFiles).length) {
 		for (const fileId in o.mapHtmlFiles) {
 			const lPolicy = o.mapHtmlFiles[fileId];
@@ -123,47 +126,47 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 				});
 		if (typeof v === 'function')
 			return async (ctx: ProcessFnContext, parsedHeaders: CspDirectiveHeaders) => {
-				const res = await v(ctx,parsedHeaders);
+				const res = await v(ctx, parsedHeaders);
 				if (typeof res === 'object' && typeof res?.name === 'string' && typeof res?.content === 'string') {
-					internalProcFileWrite(ctx,res.name,res.content);
+					internalProcFileWrite(ctx, res.name, res.content);
 				}
 			};
 		return undefined;
 	}).filter((v): v is ProcessFn => typeof v === 'function');
 
-	async function buildConfigs (
+	async function buildConfigs(
 		ctx: ProcessFnContext,
 		parsedHeaders: CspDirectiveHeaders,
 	) {
 		for (const fn of processFns) {
-			await fn(ctx,parsedHeaders);
+			await fn(ctx, parsedHeaders);
 		}
 	}
 
 	const jsFilter = createFilter('**.js');
 	const cssFilter = createFilter('**.css');
 
-	const idMap = new Map<string,HashCache>();
+	const idMap = new Map<string, HashCache>();
 
 	const cssImportUrls = new Set<string>();
 
 	const config: Partial<CherryPickedConfig> = {};
 	const plugin: PluginOption = {
 		name: 'vite-plugin-csp',
-		apply: 'build',
 		enforce: 'post',
-		configResolved (resolvedConfig) {
+		apply: () => true,
+		configResolved(resolvedConfig) {
 			// store the resolved config
 			config.command = resolvedConfig?.command;
 		},
-		async transform (code,id) {
+		async transform(code, id) {
 			if ((config.command === 'build' || onDev === 'full')) {
 				const isJs = jsFilter(id);
 				const isCss = cssFilter(id);
 				if (isJs && hashEnabled['script-src']) {
-					idMap.set(id,<HashCache>{
+					idMap.set(id, <HashCache>{
 						fileType: 'script',
-						[hashingMethod]:hash(hashingMethod,code),
+						[hashingMethod]: hash(hashingMethod, code),
 					});
 				} else if (isCss && hashEnabled['style-src']) {
 					const urls = getCssImportUrls(code);
@@ -176,20 +179,20 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 						}
 						if (x) cssImportUrls.add(x);
 					});
-					idMap.set(id,<HashCache>{
+					idMap.set(id, <HashCache>{
 						fileType: 'style',
-						[hashingMethod]:hash(hashingMethod,code),
+						[hashingMethod]: hash(hashingMethod, code),
 					});
 				}
 			}
 			return null;
 		},
-		async transformIndexHtml (html,{path: Path,filename}) {
+		async transformIndexHtml(html, { path: Path, filename }) {
 			const finalHashes = getAllSourceHashes(html, idMap, hashEnabled, hashingMethod);
 			let localPolicy = policy;
 			const vMapPol = validatedMappedPolicies;
 			if (!!vMapPol && Object.keys(vMapPol).length) {
-				const pPath = Path ? path.resolve(Path,filename) : path.resolve(filename);
+				const pPath = Path ? path.resolve(Path, filename) : path.resolve(filename);
 				for (const key of Object.keys(vMapPol)) {
 					const kPath = path.resolve(key);
 					if (kPath === pPath) {
@@ -198,7 +201,7 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 				}
 			}
 
-			function setCspAsArr (directive: keyof HashResults) {
+			function setCspAsArr(directive: keyof HashResults) {
 				const x = localPolicy.CSP[directive];
 				if (!Array.isArray(x)) {
 					if (typeof x !== 'undefined') {
@@ -236,12 +239,14 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 				htmlFileName: filename,
 				builtinProcessorFns,
 				srvConfDir,
-			},parsedHeaders);
+			}, parsedHeaders);
 			if (inject) {
-				return Object.entries(parsedHeaders).map(([k,v]) => new HtmlTag('meta',{
-					'http-equiv':k,
-					content: v,
-				}));
+				return Object.entries(parsedHeaders)
+					.filter(([k]) => injectReporting || !k.includes('Report'))
+					.map(([k, v]) => new HtmlTag('meta', {
+						'http-equiv': k,
+						content: v,
+					}));
 			}
 		},
 	};
@@ -259,8 +264,8 @@ function createViteCspPlugin (...opts: ([PolicyOptions,ViteCspPluginOpts] | [Vit
 			validatedMappedPolicies,
 			config,
 		};
-		Object.defineProperty(plugin,'debugProperties',{
-			value:x,
+		Object.defineProperty(plugin, 'debugProperties', {
+			value: x,
 		});
 	}
 

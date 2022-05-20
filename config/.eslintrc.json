@@ -15,7 +15,7 @@
 	"rules": {
 		"no-console": "warn",
 		"no-debugger": "warn",
-		"space-before-function-paren": "warn",
+		"space-before-function-paren": "off",
 		"comma-dangle": [
 			"warn",
 			"always-multiline"
