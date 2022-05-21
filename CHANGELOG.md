@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/josh-hemphill/vite-plugin-csp/compare/v1.1.0...v1.1.1) (2022-05-21)
+
+
+### Bug Fixes
+
+* :bug: `css-tree` imports esm ([1e9528a](https://github.com/josh-hemphill/vite-plugin-csp/commit/1e9528a75a4f0b24f2a885d64c452ada49932112)), closes [#5](https://github.com/josh-hemphill/vite-plugin-csp/issues/5) [#issuecomment-1133634972](https://github.com/josh-hemphill/vite-plugin-csp/issues/issuecomment-1133634972)
+
 # [1.1.0](https://github.com/josh-hemphill/vite-plugin-csp/compare/v1.0.1...v1.1.0) (2022-05-20)
 
 
