@@ -1,4 +1,4 @@
-import csstree from 'css-tree';
+import * as csstree from 'css-tree';
 const matchStartEnd = (s:string,toMatch: string) => s[0] === toMatch && s[s.length - 1] === toMatch;
 const stripTrim = (s:string) => s.slice(1,s.length - 1);
 

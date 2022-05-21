@@ -8,6 +8,7 @@
 		"noUnusedLocals": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
+		"noImplicitAny": true,
 		"outDir": "dist",
 		"lib": [
 			"dom",
