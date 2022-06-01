@@ -26,6 +26,10 @@ class HtmlTag implements HtmlTagDescriptor {
 	}
 }
 
+class HtmlHeadTag extends HtmlTag {
+	injectTo = 'head' as const;
+}
+
 export type ViteCspPluginOptions = typeof DEFAULT_OPTIONS;
 
 type ViteCspPluginOpts = Partial<ViteCspPluginOptions>
@@ -243,7 +247,7 @@ function createViteCspPlugin(...opts: ([PolicyOptions, ViteCspPluginOpts] | [Vit
 			if (inject) {
 				return Object.entries(parsedHeaders)
 					.filter(([k]) => injectReporting || !k.includes('Report'))
-					.map(([k, v]) => new HtmlTag('meta', {
+					.map(([k, v]) => new HtmlHeadTag('meta', {
 						'http-equiv': k,
 						content: v,
 					}));
