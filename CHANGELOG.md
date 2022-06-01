@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/josh-hemphill/vite-plugin-csp/compare/v1.1.1...v1.1.2) (2022-06-01)
+
+
+### Bug Fixes
+
+* :bug: html tag location in head ([fc939b2](https://github.com/josh-hemphill/vite-plugin-csp/commit/fc939b27295ecb75e3f9fd3efcf562ca43186c0a)), closes [#7](https://github.com/josh-hemphill/vite-plugin-csp/issues/7)
+
 ## [1.1.1](https://github.com/josh-hemphill/vite-plugin-csp/compare/v1.1.0...v1.1.1) (2022-05-21)
 
 
